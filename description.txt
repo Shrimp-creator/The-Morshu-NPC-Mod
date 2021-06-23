@@ -1,3 +1,42 @@
-Lamp Oil? Rope? Bombs? This NPC has it for you, my friend. As long as you spawn it by carrying a Large Ruby.
+Lamp Oil? Rope? Bombs? This NPC has it for you, my friend. As long as you spawn it by carrying a Ruby.
 
-Carrying the Large Ruby allows you to purchase Life Crystals. Post Hardmode, you also may purchase mmmmmmmm Super Potions.
+This mod adds two NPCs now!
+
+Patch notes 23/06/21:
+
+Morshu:
+
+Tweaked Morshu's sprite and stats a little to fit better with the vanilla NPCs.
+
+Changed Spawn Condition:
+Large Ruby -> Ruby <- Now.
+
+Currently Sells:
+- Gel.
+- Rope Coil.
+- Bomb.
+
+Hardmode:
+- Super Healing Potion.
+- Super Mana Potion.
+
+If you're carrying a Large Ruby:
+- Life Crystal.
+
+Added a new NPC: King.
+
+The King is another popular face amongst the Zelda CDI universe.
+
+Spawn Condition:
+12 or more Town NPCs.
+
+Currently Sells:
+- Enchanted Boomerang
+- Hero's Outfit
+- Bottle
+
+Hardmode:
+- Excalibur
+
+Full Moon:
+- Broken Hero Sword

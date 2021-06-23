@@ -4,7 +4,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 
-namespace TheMorshuMod.NPCs.Morshu
+namespace TheMorshuMod.NPCs.King
 {
     [AutoloadHead]
 
@@ -12,17 +12,17 @@ namespace TheMorshuMod.NPCs.Morshu
     {
         public override string Texture
         {
-            get { return "TheMorshuMod/NPCs/Morshu"; }
+            get { return "TheMorshuMod/NPCs/King"; }
         }
 
         public override string[] AltTextures
         {
-            get { return new[] { "TheMorshuMod/NPCs/Morshu_Alt_1" }; }
+            get { return new[] { "TheMorshuMod/NPCs/King_Alt_1" }; }
         }
 
         public override bool Autoload(ref string name)
         {
-            name = "Rupee Merchant";
+            name = "King";
             return mod.Properties.Autoload;
         }
 
@@ -35,7 +35,7 @@ namespace TheMorshuMod.NPCs.Morshu
             NPCID.Sets.AttackType[npc.type] = 0;
             NPCID.Sets.AttackTime[npc.type] = 90;
             NPCID.Sets.AttackAverageChance[npc.type] = 30;
-            NPCID.Sets.HatOffsetY[npc.type] = 3;
+            NPCID.Sets.HatOffsetY[npc.type] = 4;
         }
 
         public override void SetDefaults()
@@ -56,28 +56,17 @@ namespace TheMorshuMod.NPCs.Morshu
 
         public override bool CanTownNPCSpawn(int numTownNPCs, int money)
         {
-            for (int k = 0; k < 255; k++)
+            if (numTownNPCs >= 12)
             {
-                Player player = Main.player[k];
-                if (!player.active)
-                {
-                    continue;
-                }
-
-                foreach (Item item in player.inventory)
-                {
-                    if (item.type == ItemID.Ruby)
-                    {
-                        return true;
-                    }
-                }
+                return true;
             }
+
             return false;
         }
 
         public override string TownNPCName()
         {
-            return "Morshu";
+            return "Harkinian";
         }
 
         public override string GetChat()
@@ -85,11 +74,11 @@ namespace TheMorshuMod.NPCs.Morshu
             switch (Main.rand.Next(3))
             {
                 case 0:
-                    return "Lamp Oil? Rope? Bombs? You want it? It's yours, my friend.";
+                    return "I wonder what's for dinner.";
                 case 1:
-                    return "Sorry, I can't give credit.";
+                    return "OAH HA HA HA , enough!";
                 default:
-                    return "This will surely make me mmmmmm richer.";
+                    return "This peace is what all true warriors strive for.";
             }
         }
 
@@ -107,49 +96,40 @@ namespace TheMorshuMod.NPCs.Morshu
             }
             /*else
             {
-                Main.npcChatText = "I'm sorry! I can't give credit. Come back when you're a little mmmmm richer.";
+                Main.npcChatText = "";
             }*/
         }
 
         public override void SetupShop(Chest shop, ref int nextSlot)
         {
-            shop.item[nextSlot].SetDefaults(ItemID.Gel);
+            shop.item[nextSlot].SetDefaults(ItemID.EnchantedBoomerang);
             nextSlot++;
-            shop.item[nextSlot].SetDefaults(ItemID.RopeCoil);
+            shop.item[nextSlot].SetDefaults(ItemID.HerosHat);
             nextSlot++;
-            shop.item[nextSlot].SetDefaults(ItemID.Bomb);
+            shop.item[nextSlot].SetDefaults(ItemID.HerosShirt);
+            nextSlot++;
+            shop.item[nextSlot].SetDefaults(ItemID.HerosPants);
+            nextSlot++;
+            shop.item[nextSlot].SetDefaults(ItemID.Bottle);
             nextSlot++;
             if (Main.hardMode)
             {
-                shop.item[nextSlot].SetDefaults(ItemID.SuperHealingPotion);
-                nextSlot++;
-                shop.item[nextSlot].SetDefaults(ItemID.SuperManaPotion);
+                shop.item[nextSlot].SetDefaults(ItemID.Excalibur);
                 nextSlot++;
             }
-            for (int k = 0; k < 255; k++)
+            if (Main.moonPhase == 1)
             {
-                Player player = Main.player[k];
-                if (!player.active)
-                {
-                    continue;
-                }
-
-                foreach (Item item in player.inventory)
-                {
-                    if (item.type == ItemID.LargeRuby)
-                    {
-                        shop.item[nextSlot].SetDefaults(ItemID.LifeCrystal);
-                        nextSlot++;
-                    }
-                }
+                shop.item[nextSlot].SetDefaults(ItemID.BrokenHeroSword);
+                nextSlot++;
             }
         }
 
         public override void NPCLoot()
         {
-            Item.NewItem(npc.getRect(), ItemID.Gel);
-            Item.NewItem(npc.getRect(), ItemID.Rope);
-            Item.NewItem(npc.getRect(), ItemID.Bomb);
+            Item.NewItem(npc.getRect(), ItemID.PixieDust);
+            Item.NewItem(npc.getRect(), ItemID.PixieDust);
+            Item.NewItem(npc.getRect(), ItemID.PixieDust);
+            Item.NewItem(npc.getRect(), ItemID.GoldCrown);
         }
 
         public override void TownNPCAttackStrength(ref int damage, ref float knockback)
@@ -166,7 +146,7 @@ namespace TheMorshuMod.NPCs.Morshu
 
         public override void TownNPCAttackProj(ref int projType, ref int attackDelay)
         {
-            projType = ModContent.ProjectileType<Projectiles.MorshuProjectile>();
+            projType = ProjectileID.TopazBolt;
             attackDelay = 1;
         }
 
@@ -174,22 +154,6 @@ namespace TheMorshuMod.NPCs.Morshu
         {
             multiplier = 5f;
             randomOffset = 2f;
-        }
-    }
-
-    namespace Autoloader
-    {
-        class Autoloader : Mod
-        {
-            public Autoloader()
-            {
-                Properties = new ModProperties()
-                {
-                    Autoload = true,
-                    AutoloadGores = true,
-                    AutoloadSounds = true
-                };
-            }
         }
     }
 }
