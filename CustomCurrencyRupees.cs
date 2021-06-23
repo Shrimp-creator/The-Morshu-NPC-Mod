@@ -5,7 +5,7 @@ using Terraria.Localization;
 
 namespace ExampleMod
 {
-    public class ExampleCustomCurrency : CustomCurrencySingleCoin
+    /*public class ExampleCustomCurrency : CustomCurrencySingleCoin
     {
         public Color ExampleCustomCurrencyTextColor = Color.BlueViolet;
 
@@ -26,5 +26,5 @@ namespace ExampleMod
                     "faces"
                 });
         }
-    }
+    }*/
 }
