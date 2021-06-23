@@ -6,6 +6,11 @@ Patch notes 24/06/21:
 
 Improved Sprites of The King.
 Changed some Sprites of Morshu.
+Loot of NPCs more randomized to fit in with vanilla NPCs.
+
+Bug fix:
+
+King stopped attacking latest built -> Shoots Topaz Bolts again.
 
 Patch notes 23/06/21:
 

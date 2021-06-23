@@ -155,7 +155,7 @@ namespace TheMorshuMod.NPCs.King
 
         public override void TownNPCAttackProj(ref int projType, ref int attackDelay)
         {
-            projType = ProjectileID.DryadsWardCircle;
+            projType = ProjectileID.TopazBolt;
             attackDelay = 1;
         }
 
