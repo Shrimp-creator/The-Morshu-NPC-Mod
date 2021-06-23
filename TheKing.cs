@@ -85,7 +85,7 @@ namespace TheMorshuMod.NPCs.King
         public override void SetChatButtons(ref string button, ref string button2)
         {
             button = Language.GetTextValue("LegacyInterface.28");
-            //button2 = "Haggle";
+            //button2 = "Cloak?";
         }
 
         public override void OnChatButtonClicked(bool firstButton, ref bool shop)
@@ -94,10 +94,10 @@ namespace TheMorshuMod.NPCs.King
             {
                 shop = true;
             }
-            /*else
+            else
             {
-                Main.npcChatText = "";
-            }*/
+                //Main.npcChatText = "This it the Magic Cape! Don't cause too much trouble now.";
+            }
         }
 
         public override void SetupShop(Chest shop, ref int nextSlot)
@@ -126,10 +126,19 @@ namespace TheMorshuMod.NPCs.King
 
         public override void NPCLoot()
         {
-            Item.NewItem(npc.getRect(), ItemID.PixieDust);
-            Item.NewItem(npc.getRect(), ItemID.PixieDust);
-            Item.NewItem(npc.getRect(), ItemID.PixieDust);
-            Item.NewItem(npc.getRect(), ItemID.GoldCrown);
+            if (Main.rand.Next(5) == 0)
+            {
+                Item.NewItem(npc.getRect(), ItemID.GoldCrown);
+            }
+            else
+            {
+                Item.NewItem(npc.getRect(), ItemID.PixieDust, Main.rand.Next(4));
+            }
+        }
+
+        public override bool CanGoToStatue(bool toKingStatue)
+        {
+            return true;
         }
 
         public override void TownNPCAttackStrength(ref int damage, ref float knockback)
@@ -146,14 +155,14 @@ namespace TheMorshuMod.NPCs.King
 
         public override void TownNPCAttackProj(ref int projType, ref int attackDelay)
         {
-            projType = ProjectileID.TopazBolt;
+            projType = ProjectileID.DryadsWardCircle;
             attackDelay = 1;
         }
 
         public override void TownNPCAttackProjSpeed(ref float multiplier, ref float gravityCorrection, ref float randomOffset)
         {
             multiplier = 5f;
-            randomOffset = 2f;
+            randomOffset = 0f;
         }
     }
 }

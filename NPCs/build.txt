@@ -1,3 +1,0 @@
-displayName = The Morshu NPC Mod
-author = Shrimp
-version = 0.4

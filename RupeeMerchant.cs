@@ -4,7 +4,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 
-namespace TheMorshuMod.NPCs.Morshu
+namespace TheMorshuMod.NPCs.RupeeMerchant
 {
     [AutoloadHead]
 
@@ -139,6 +139,8 @@ namespace TheMorshuMod.NPCs.Morshu
                     if (item.type == ItemID.LargeRuby)
                     {
                         shop.item[nextSlot].SetDefaults(ItemID.LifeCrystal);
+                        //shop.item[nextSlot].shopCustomPrice = 1;
+                        //shop.item[nextSlot].shopSpecialCurrency = TheMorshuMod.RubyCustomCurrencyId;
                         nextSlot++;
                     }
                 }
@@ -147,9 +149,12 @@ namespace TheMorshuMod.NPCs.Morshu
 
         public override void NPCLoot()
         {
-            Item.NewItem(npc.getRect(), ItemID.Gel);
-            Item.NewItem(npc.getRect(), ItemID.Rope);
-            Item.NewItem(npc.getRect(), ItemID.Bomb);
+            if (Main.rand.Next(3) == 0)
+            {
+                Item.NewItem(npc.getRect(), ItemID.Gel);
+                Item.NewItem(npc.getRect(), ItemID.Rope);
+                Item.NewItem(npc.getRect(), ItemID.Bomb);
+            }
         }
 
         public override void TownNPCAttackStrength(ref int damage, ref float knockback)
@@ -174,22 +179,6 @@ namespace TheMorshuMod.NPCs.Morshu
         {
             multiplier = 5f;
             randomOffset = 2f;
-        }
-    }
-
-    namespace Autoloader
-    {
-        class Autoloader : Mod
-        {
-            public Autoloader()
-            {
-                Properties = new ModProperties()
-                {
-                    Autoload = true,
-                    AutoloadGores = true,
-                    AutoloadSounds = true
-                };
-            }
         }
     }
 }
