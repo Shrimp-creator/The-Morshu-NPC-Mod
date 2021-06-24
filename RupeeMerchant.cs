@@ -121,9 +121,9 @@ namespace TheMorshuMod.NPCs.RupeeMerchant
             nextSlot++;
             if (Main.hardMode)
             {
-                shop.item[nextSlot].SetDefaults(ItemID.SuperHealingPotion);
+                shop.item[nextSlot].SetDefaults(ItemID.GreaterHealingPotion);
                 nextSlot++;
-                shop.item[nextSlot].SetDefaults(ItemID.SuperManaPotion);
+                shop.item[nextSlot].SetDefaults(ItemID.GreaterManaPotion);
                 nextSlot++;
             }
             for (int k = 0; k < 255; k++)
@@ -139,8 +139,7 @@ namespace TheMorshuMod.NPCs.RupeeMerchant
                     if (item.type == ItemID.LargeRuby)
                     {
                         shop.item[nextSlot].SetDefaults(ItemID.LifeCrystal);
-                        //shop.item[nextSlot].shopCustomPrice = 1;
-                        //shop.item[nextSlot].shopSpecialCurrency = TheMorshuMod.RubyCustomCurrencyId;
+                        shop.item[nextSlot].shopCustomPrice = 100000;
                         nextSlot++;
                     }
                 }

@@ -7,11 +7,13 @@ Patch notes 24/06/21:
 Improved Sprites of The King.
 Changed some Sprites of Morshu.
 Loot of NPCs more randomized to fit in with vanilla NPCs.
+Balance Changes to make the mod feel more vanilla.
 
 Bug fix:
 
 King stopped attacking latest built -> Shoots Topaz Bolts again.
 Fixed multiplayer bug that made you disconnect.
+Cleaned up code causing another bug.
 
 Patch notes 23/06/21:
 
@@ -28,8 +30,8 @@ Currently Sells:
 - Bomb.
 
 Hardmode:
-- Super Healing Potion.
-- Super Mana Potion.
+- Greater Healing Potion.
+- Greater Mana Potion.
 
 If you're carrying a Large Ruby:
 - Life Crystal.
@@ -46,8 +48,5 @@ Currently Sells:
 - Hero's Outfit
 - Bottle
 
-Hardmode:
-- Excalibur
-
-Full Moon:
+If any Mech Boss was defeated during a Full Moon:
 - Broken Hero Sword
