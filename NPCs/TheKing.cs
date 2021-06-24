@@ -113,7 +113,7 @@ namespace TheMorshuMod.NPCs.King
             shop.item[nextSlot].SetDefaults(ItemID.Bottle);
             nextSlot++;
 
-            if (Main.downedMechBoss1 == true)
+            if(Main.downedMechBoss1 == true)
             {
                 if (Main.moonPhase == 1)
                 {

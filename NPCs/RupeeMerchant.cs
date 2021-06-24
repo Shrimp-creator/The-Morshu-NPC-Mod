@@ -4,7 +4,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 
-namespace TheMorshuMod.NPCs.King
+namespace TheMorshuMod.NPCs.RupeeMerchant
 {
     [AutoloadHead]
 
@@ -12,17 +12,17 @@ namespace TheMorshuMod.NPCs.King
     {
         public override string Texture
         {
-            get { return "TheMorshuMod/NPCs/King"; }
+            get { return "TheMorshuMod/NPCs/Morshu"; }
         }
 
         public override string[] AltTextures
         {
-            get { return new[] { "TheMorshuMod/NPCs/King_Alt_1" }; }
+            get { return new[] { "TheMorshuMod/NPCs/Morshu_Alt_1" }; }
         }
 
         public override bool Autoload(ref string name)
         {
-            name = "King";
+            name = "Rupee Merchant";
             return mod.Properties.Autoload;
         }
 
@@ -35,7 +35,7 @@ namespace TheMorshuMod.NPCs.King
             NPCID.Sets.AttackType[npc.type] = 0;
             NPCID.Sets.AttackTime[npc.type] = 90;
             NPCID.Sets.AttackAverageChance[npc.type] = 30;
-            NPCID.Sets.HatOffsetY[npc.type] = 4;
+            NPCID.Sets.HatOffsetY[npc.type] = 3;
         }
 
         public override void SetDefaults()
@@ -56,17 +56,28 @@ namespace TheMorshuMod.NPCs.King
 
         public override bool CanTownNPCSpawn(int numTownNPCs, int money)
         {
-            if (numTownNPCs >= 12)
+            for (int k = 0; k < 255; k++)
             {
-                return true;
-            }
+                Player player = Main.player[k];
+                if (!player.active)
+                {
+                    continue;
+                }
 
+                foreach (Item item in player.inventory)
+                {
+                    if (item.type == ItemID.Ruby)
+                    {
+                        return true;
+                    }
+                }
+            }
             return false;
         }
 
         public override string TownNPCName()
         {
-            return "Harkinian";
+            return "Morshu";
         }
 
         public override string GetChat()
@@ -74,18 +85,18 @@ namespace TheMorshuMod.NPCs.King
             switch (Main.rand.Next(3))
             {
                 case 0:
-                    return "I wonder what's for dinner.";
+                    return "Lamp Oil? Rope? Bombs? You want it? It's yours, my friend.";
                 case 1:
-                    return "OAH HA HA HA , enough!";
+                    return "Sorry, I can't give credit.";
                 default:
-                    return "This peace is what all true warriors strive for.";
+                    return "This will surely make me mmmmmm richer.";
             }
         }
 
         public override void SetChatButtons(ref string button, ref string button2)
         {
             button = Language.GetTextValue("LegacyInterface.28");
-            //button2 = "Cloak?";
+            //button2 = "Haggle";
         }
 
         public override void OnChatButtonClicked(bool firstButton, ref bool shop)
@@ -94,50 +105,55 @@ namespace TheMorshuMod.NPCs.King
             {
                 shop = true;
             }
-            else
+            /*else
             {
-                //Main.npcChatText = "This it the Magic Cape! Don't cause too much trouble now.";
-            }
+                Main.npcChatText = "I'm sorry! I can't give credit. Come back when you're a little mmmmm richer.";
+            }*/
         }
 
         public override void SetupShop(Chest shop, ref int nextSlot)
         {
-            shop.item[nextSlot].SetDefaults(ItemID.EnchantedBoomerang);
+            shop.item[nextSlot].SetDefaults(ItemID.Gel);
             nextSlot++;
-            shop.item[nextSlot].SetDefaults(ItemID.HerosHat);
+            shop.item[nextSlot].SetDefaults(ItemID.RopeCoil);
             nextSlot++;
-            shop.item[nextSlot].SetDefaults(ItemID.HerosShirt);
+            shop.item[nextSlot].SetDefaults(ItemID.Bomb);
             nextSlot++;
-            shop.item[nextSlot].SetDefaults(ItemID.HerosPants);
-            nextSlot++;
-            shop.item[nextSlot].SetDefaults(ItemID.Bottle);
-            nextSlot++;
-
-            if (Main.downedMechBoss1 == true)
+            if (Main.hardMode)
             {
-                if (Main.moonPhase == 1)
+                shop.item[nextSlot].SetDefaults(ItemID.GreaterHealingPotion);
+                nextSlot++;
+                shop.item[nextSlot].SetDefaults(ItemID.GreaterManaPotion);
+                nextSlot++;
+            }
+            for (int k = 0; k < 255; k++)
+            {
+                Player player = Main.player[k];
+                if (!player.active)
                 {
-                    shop.item[nextSlot].SetDefaults(ItemID.BrokenHeroSword);
-                    nextSlot++;
+                    continue;
+                }
+
+                foreach (Item item in player.inventory)
+                {
+                    if (item.type == ItemID.LargeRuby)
+                    {
+                        shop.item[nextSlot].SetDefaults(ItemID.LifeCrystal);
+                        shop.item[nextSlot].shopCustomPrice = 100000;
+                        nextSlot++;
+                    }
                 }
             }
         }
 
         public override void NPCLoot()
         {
-            if (Main.rand.Next(5) == 0)
+            if (Main.rand.Next(3) == 0)
             {
-                Item.NewItem(npc.getRect(), ItemID.GoldCrown);
+                Item.NewItem(npc.getRect(), ItemID.Gel);
+                Item.NewItem(npc.getRect(), ItemID.Rope);
+                Item.NewItem(npc.getRect(), ItemID.Bomb);
             }
-            else
-            {
-                Item.NewItem(npc.getRect(), ItemID.PixieDust, Main.rand.Next(4));
-            }
-        }
-
-        public override bool CanGoToStatue(bool toKingStatue)
-        {
-            return true;
         }
 
         public override void TownNPCAttackStrength(ref int damage, ref float knockback)
@@ -154,14 +170,14 @@ namespace TheMorshuMod.NPCs.King
 
         public override void TownNPCAttackProj(ref int projType, ref int attackDelay)
         {
-            projType = ProjectileID.TopazBolt;
+            projType = ModContent.ProjectileType<Projectiles.MorshuProjectile>();
             attackDelay = 1;
         }
 
         public override void TownNPCAttackProjSpeed(ref float multiplier, ref float gravityCorrection, ref float randomOffset)
         {
             multiplier = 5f;
-            randomOffset = 0f;
+            randomOffset = 2f;
         }
     }
 }

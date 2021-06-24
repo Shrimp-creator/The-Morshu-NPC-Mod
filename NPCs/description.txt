@@ -1,0 +1,52 @@
+Lamp Oil? Rope? Bombs? This NPC has it for you, my friend. As long as you spawn it by carrying a Ruby.
+
+This mod adds two NPCs now!
+
+Patch notes 24/06/21:
+
+Improved Sprites of The King.
+Changed some Sprites of Morshu.
+Loot of NPCs more randomized to fit in with vanilla NPCs.
+Balance Changes to make the mod feel more vanilla.
+
+Bug fix:
+
+King stopped attacking latest built -> Shoots Topaz Bolts again.
+Fixed multiplayer bug that made you disconnect.
+Cleaned up code causing another bug.
+
+Patch notes 23/06/21:
+
+Morshu:
+
+Tweaked Morshu's sprite and stats a little to fit better with the vanilla NPCs.
+
+Changed Spawn Condition:
+Large Ruby -> Ruby <- Now.
+
+Currently Sells:
+- Gel.
+- Rope Coil.
+- Bomb.
+
+Hardmode:
+- Greater Healing Potion.
+- Greater Mana Potion.
+
+If you're carrying a Large Ruby:
+- Life Crystal.
+
+Added a new NPC: King.
+
+The King is another popular face amongst the Zelda CDI universe.
+
+Spawn Condition:
+12 or more Town NPCs.
+
+Currently Sells:
+- Enchanted Boomerang
+- Hero's Outfit
+- Bottle
+
+If any Mech Boss was defeated during a Full Moon:
+- Broken Hero Sword
