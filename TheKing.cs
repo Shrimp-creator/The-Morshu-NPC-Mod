@@ -17,7 +17,7 @@ namespace TheMorshuMod.NPCs.King
 
         public override string[] AltTextures
         {
-            get { return new[] { "TheMorshuMod/NPCs/King_Alt_1" }; }
+            get { return new[] { "TheMorshuMod/NPCs/King_Party" }; }
         }
 
         public override bool Autoload(ref string name)
@@ -35,7 +35,7 @@ namespace TheMorshuMod.NPCs.King
             NPCID.Sets.AttackType[npc.type] = 0;
             NPCID.Sets.AttackTime[npc.type] = 90;
             NPCID.Sets.AttackAverageChance[npc.type] = 30;
-            NPCID.Sets.HatOffsetY[npc.type] = 4;
+            NPCID.Sets.HatOffsetY[npc.type] = -6;
         }
 
         public override void SetDefaults()
@@ -71,21 +71,28 @@ namespace TheMorshuMod.NPCs.King
 
         public override string GetChat()
         {
-            switch (Main.rand.Next(3))
+            if (Main.moonPhase == 0)
             {
-                case 0:
-                    return "I wonder what's for dinner.";
-                case 1:
-                    return "OAH HA HA HA , enough!";
-                default:
-                    return "This peace is what all true warriors strive for.";
+                return "Why don't you rid me of this old sword?";
+            }
+            else
+            {
+                switch (Main.rand.Next(3))
+                {
+                    case 0:
+                        return "I wonder what's for dinner.";
+                    case 1:
+                        return "OAH HA HA HA , enough!";
+                    default:
+                        return "This peace is what all true warriors strive for.";
+                }
             }
         }
 
         public override void SetChatButtons(ref string button, ref string button2)
         {
             button = Language.GetTextValue("LegacyInterface.28");
-            //button2 = "Cloak?";
+            //button2 = "Cloak";
         }
 
         public override void OnChatButtonClicked(bool firstButton, ref bool shop)
@@ -96,28 +103,72 @@ namespace TheMorshuMod.NPCs.King
             }
             else
             {
-                //Main.npcChatText = "This it the Magic Cape! Don't cause too much trouble now.";
+                /*Main.npcChatText = "The Magic Cape! Don't cause too much trouble now.";
+
+                for (int k = 0; k < 255; k++)
+                {
+                    Player player = Main.player[k];
+                    if (!player.active)
+                    {
+                        continue;
+                    }
+
+                    Main.player[k].AddBuff(BuffID.Invisibility, 36000);
+                }*/
             }
         }
 
         public override void SetupShop(Chest shop, ref int nextSlot)
         {
-            shop.item[nextSlot].SetDefaults(ItemID.EnchantedBoomerang);
-            nextSlot++;
-            shop.item[nextSlot].SetDefaults(ItemID.HerosHat);
-            nextSlot++;
-            shop.item[nextSlot].SetDefaults(ItemID.HerosShirt);
-            nextSlot++;
-            shop.item[nextSlot].SetDefaults(ItemID.HerosPants);
-            nextSlot++;
-            shop.item[nextSlot].SetDefaults(ItemID.Bottle);
+            if (Main.hardMode)
+            {
+                shop.item[nextSlot].SetDefaults(ItemID.EnchantedBoomerang);
+                shop.item[nextSlot].shopCustomPrice = 100000;
+                nextSlot++;
+            }
+            else
+            {
+                shop.item[nextSlot].SetDefaults(ItemID.WoodenBoomerang);
+                shop.item[nextSlot].shopCustomPrice = 1000;
+                nextSlot++;
+            }
+
+            if (NPC.downedBoss3)
+            {
+                shop.item[nextSlot].SetDefaults(ItemID.CobaltShield);
+                shop.item[nextSlot].shopCustomPrice = 50000;
+                nextSlot++;
+            }
+
+            if (Main.hardMode)
+            {
+                shop.item[nextSlot].SetDefaults(ItemID.HerosHat);
+                nextSlot++;
+                shop.item[nextSlot].SetDefaults(ItemID.HerosShirt);
+                shop.item[nextSlot].shopCustomPrice = 10000;
+                nextSlot++;
+                shop.item[nextSlot].SetDefaults(ItemID.HerosPants);
+                shop.item[nextSlot].shopCustomPrice = 10000;
+                nextSlot++;
+            }
+
+            if (NPC.downedBoss2)
+            {
+                shop.item[nextSlot].SetDefaults(ItemID.Bottle);
+                shop.item[nextSlot].shopCustomPrice = 1500;
+                nextSlot++;
+            }
+
+            shop.item[nextSlot].SetDefaults(ItemID.PixieDust);
+            shop.item[nextSlot].shopCustomPrice = 250;
             nextSlot++;
 
-            if(NPC.downedMechBoss1 == true)
+            if (NPC.downedMechBossAny)
             {
-                if (Main.moonPhase == 1)
+                if (Main.moonPhase == 0)
                 {
                     shop.item[nextSlot].SetDefaults(ItemID.BrokenHeroSword);
+                    shop.item[nextSlot].shopCustomPrice = 250000;
                     nextSlot++;
                 }
             }
@@ -129,7 +180,7 @@ namespace TheMorshuMod.NPCs.King
             {
                 Item.NewItem(npc.getRect(), ItemID.GoldCrown);
             }
-            else
+            else if (Main.rand.Next(5) < 3)
             {
                 Item.NewItem(npc.getRect(), ItemID.PixieDust, Main.rand.Next(4));
             }

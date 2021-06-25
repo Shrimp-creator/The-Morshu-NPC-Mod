@@ -2,6 +2,25 @@ Lamp Oil? Rope? Bombs? This NPC has it for you, my friend. As long as you spawn 
 
 This mod adds two NPCs now!
 
+Patch notes 25/06/21
+
+Improved Sprites of The King and Morshu.
+Party Hats now look good on the two!
+Tweaked King's Loot a little.
+
+Rebalanced Items sold to not ruin Vanilla feel.
+
+Added Pixie Dust to the King's store.
+
+Items in NPC stores now unlock while progressing.
+
+Morshu still sells healing potions, but they improve the further you are in the game!
+The King's store items now also progress better.
+
+Fixed:
+
+Broken Sword was sold during the wrong moon phase. Now it can be purchased during full moon as it should be able to.
+
 Patch notes 24/06/21:
 
 Improved Sprites of The King.
@@ -24,6 +43,8 @@ Tweaked Morshu's sprite and stats a little to fit better with the vanilla NPCs.
 Changed Spawn Condition:
 Large Ruby -> Ruby <- Now.
 
+[OUTDATED]
+
 Currently Sells:
 - Gel.
 - Rope Coil.
@@ -42,6 +63,8 @@ The King is another popular face amongst the Zelda CDI universe.
 
 Spawn Condition:
 12 or more Town NPCs.
+
+[OUTDATED]
 
 Currently Sells:
 - Enchanted Boomerang

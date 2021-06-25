@@ -17,8 +17,10 @@ namespace TheMorshuMod.NPCs.RupeeMerchant
 
         public override string[] AltTextures
         {
-            get { return new[] { "TheMorshuMod/NPCs/Morshu_Alt_1" }; }
+            get { return new[] { "TheMorshuMod/NPCs/Morshu_Party" }; }
         }
+
+        
 
         public override bool Autoload(ref string name)
         {
@@ -35,7 +37,7 @@ namespace TheMorshuMod.NPCs.RupeeMerchant
             NPCID.Sets.AttackType[npc.type] = 0;
             NPCID.Sets.AttackTime[npc.type] = 90;
             NPCID.Sets.AttackAverageChance[npc.type] = 30;
-            NPCID.Sets.HatOffsetY[npc.type] = 3;
+            NPCID.Sets.HatOffsetY[npc.type] = 2;
         }
 
         public override void SetDefaults()
@@ -114,18 +116,61 @@ namespace TheMorshuMod.NPCs.RupeeMerchant
         public override void SetupShop(Chest shop, ref int nextSlot)
         {
             shop.item[nextSlot].SetDefaults(ItemID.Gel);
+            shop.item[nextSlot].shopCustomPrice = 20;
             nextSlot++;
             shop.item[nextSlot].SetDefaults(ItemID.RopeCoil);
+            shop.item[nextSlot].shopCustomPrice = 300;
             nextSlot++;
             shop.item[nextSlot].SetDefaults(ItemID.Bomb);
             nextSlot++;
-            if (Main.hardMode)
+
+            if (NPC.downedMoonlord)
             {
-                shop.item[nextSlot].SetDefaults(ItemID.GreaterHealingPotion);
+                shop.item[nextSlot].SetDefaults(ItemID.SuperHealingPotion);
+                shop.item[nextSlot].shopCustomPrice = 100000;
                 nextSlot++;
-                shop.item[nextSlot].SetDefaults(ItemID.GreaterManaPotion);
+                shop.item[nextSlot].SetDefaults(ItemID.SuperManaPotion);
+                shop.item[nextSlot].shopCustomPrice = 100000;
                 nextSlot++;
             }
+            else
+            {
+                if (NPC.downedMechBossAny)
+                {
+                    shop.item[nextSlot].SetDefaults(ItemID.GreaterHealingPotion);
+                    shop.item[nextSlot].shopCustomPrice = 10000;
+                    nextSlot++;
+                    shop.item[nextSlot].SetDefaults(ItemID.GreaterManaPotion);
+                    shop.item[nextSlot].shopCustomPrice = 10000;
+                    nextSlot++;
+                }
+                else
+                {
+                    if (Main.hardMode)
+                    {
+                        shop.item[nextSlot].SetDefaults(ItemID.HealingPotion);
+                        shop.item[nextSlot].shopCustomPrice = 1000;
+                        nextSlot++;
+                        shop.item[nextSlot].SetDefaults(ItemID.ManaPotion);
+                        shop.item[nextSlot].shopCustomPrice = 1000;
+                        nextSlot++;
+                    }
+                    else
+                    {
+                        if (NPC.downedBoss1)
+                        {
+                            shop.item[nextSlot].SetDefaults(ItemID.LesserHealingPotion);
+                            shop.item[nextSlot].shopCustomPrice = 100;
+                            nextSlot++;
+                            shop.item[nextSlot].SetDefaults(ItemID.LesserManaPotion);
+                            shop.item[nextSlot].shopCustomPrice = 100;
+                            nextSlot++;
+                        }
+
+                    }
+                }
+            }
+
             for (int k = 0; k < 255; k++)
             {
                 Player player = Main.player[k];
@@ -139,7 +184,7 @@ namespace TheMorshuMod.NPCs.RupeeMerchant
                     if (item.type == ItemID.LargeRuby)
                     {
                         shop.item[nextSlot].SetDefaults(ItemID.LifeCrystal);
-                        shop.item[nextSlot].shopCustomPrice = 100000;
+                        shop.item[nextSlot].shopCustomPrice = 250000;
                         nextSlot++;
                     }
                 }
